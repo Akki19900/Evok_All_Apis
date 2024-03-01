@@ -1,0 +1,96 @@
+package com.npst.evok.api.evok_apis.serviceimpl;
+import com.npst.evok.api.evok_apis.pojo.CommonForAllPayout;
+import com.npst.evok.api.evok_apis.service.AccountVerificationUpiIDService;
+import org.json.JSONObject;
+import org.springframework.stereotype.Service;
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
+import java.util.Base64;
+import java.util.Random;
+
+@Service
+public class AccountVerificationUpiIdServiceImpl implements AccountVerificationUpiIDService {
+    @Override
+    public String accountVerUpiId(CommonForAllPayout commonForAllPayout) {
+        JSONObject obj = new JSONObject();
+        ENC_KEY = commonForAllPayout.getEncKey();
+        String extTransactionId = commonForAllPayout.getExtTransactionId();
+        System.out.println(extTransactionId);
+        obj.put("source", commonForAllPayout.getSource());
+        obj.put("upiId", commonForAllPayout.getUpiId());
+        obj.put("sid", commonForAllPayout.getSid());
+        obj.put("extTransactionId", commonForAllPayout.getSource() + Math.abs(new Random().nextInt()));
+        String checksum = generateVerifyVpaChecksum(obj, commonForAllPayout.getCheckSumKey());
+        obj.put("checksum", checksum);
+        return encryptRequest(obj.toString(), commonForAllPayout.getEncKey());
+    }
+
+    public static String ENC_KEY = "";
+    private static String generateVerifyVpaChecksum(JSONObject qrObject, String checkSumKey) {
+        StringBuilder concatenatedString = new StringBuilder();
+        try {
+            concatenatedString.append(qrObject.get("source"));
+            concatenatedString.append(qrObject.get("sid"));
+            concatenatedString.append(qrObject.get("upiId"));
+            concatenatedString.append(qrObject.get("extTransactionId"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return generateChecksumMerchant(concatenatedString.toString(), checkSumKey);
+    }
+    public static String generateChecksumMerchant(String concatenatedString, String checksumkey) {
+        String inputString = concatenatedString + checksumkey;
+        StringBuffer sb = null;
+        MessageDigest md;
+        try {
+            md = MessageDigest.getInstance("SHA-256");
+            md.update(inputString.getBytes());
+            byte[] byteData = md.digest();
+            sb = new StringBuffer();
+            for (byte byteDatum : byteData) {
+                sb.append(Integer.toString((byteDatum & 0xff) + 0x100, 16).substring(1));
+            }
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return sb.toString();
+    }
+    private static String encryptRequest(String strToEncrypt, String encryptKey) {
+        try {
+            Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
+            cipher.init(Cipher.ENCRYPT_MODE, setMerchantKey(encryptKey));
+            return Base64.getEncoder().encodeToString(cipher.doFinal(strToEncrypt.getBytes(StandardCharsets.UTF_8)));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    private static SecretKeySpec setMerchantKey(String myKey) {
+        SecretKeySpec merchantSecretKey_ = null;
+        try {
+            MessageDigest sha = null;
+            byte[] key_ = myKey.getBytes(StandardCharsets.UTF_8);
+            sha = MessageDigest.getInstance("SHA-256");
+            key_ = sha.digest(key_);
+            key_ = Arrays.copyOf(key_, 16);
+            merchantSecretKey_ = new SecretKeySpec(key_, "AES");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return merchantSecretKey_;
+    }
+    public static String decryptResponse(String responseString, String encryptKey) {
+        try {
+            Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5PADDING");
+            cipher.init(Cipher.DECRYPT_MODE, setMerchantKey(encryptKey));
+            return new String(cipher.doFinal(Base64.getDecoder().decode(responseString)), StandardCharsets.UTF_8);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+}
