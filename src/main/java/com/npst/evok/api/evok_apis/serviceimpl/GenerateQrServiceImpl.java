@@ -1,26 +1,26 @@
 package com.npst.evok.api.evok_apis.serviceimpl;
 
+import com.npst.evok.api.evok_apis.pojo.GenerateQr;
+import com.npst.evok.api.evok_apis.repository.GenerateQrRepository;
+import com.npst.evok.api.evok_apis.service.GenerateQrService;
+import lombok.AllArgsConstructor;
+import org.json.JSONObject;
+import org.springframework.stereotype.Service;
+
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.Random;
-import javax.crypto.Cipher;
-import javax.crypto.spec.SecretKeySpec;
-
-import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import com.npst.evok.api.evok_apis.pojo.GenerateQr;
-import com.npst.evok.api.evok_apis.repository.GenerateQrRepository;
-import com.npst.evok.api.evok_apis.service.GenerateQrService;
 
 @Service
+@AllArgsConstructor
 public class GenerateQrServiceImpl implements GenerateQrService {
 
     public static String ENC_KEY = "";
-    @Autowired
     private GenerateQrRepository generateQrRepository;
 
     public static String generateRandomString(String baseString, int length) {
@@ -32,19 +32,29 @@ public class GenerateQrServiceImpl implements GenerateQrService {
             char randomChar = characters.charAt(randomIndex);
             randomString.append(randomChar);
         }
-
         return baseString + randomString.toString();
     }
 
-    private static JSONObject getJsonRequest() {
+    @Override
+    public String qrGenerate(GenerateQr generateQr) {
         JSONObject obj = new JSONObject();
-        // obj.put("source", SOURCE);
-        // obj.put("channel", CHANNEL);
-        // obj.put("extTransactionId", EXTERNAL_TRANS_ID);
-        // obj.put("upiId", UPI_ID);
-        // obj.put("terminalId", TERMINAL_ID);
-        // obj.put("sid", SID);
-        return obj;
+        ENC_KEY = generateQr.getEncKey();
+        String source = generateQr.getSource();
+        String exTxnId = generateRandomString(generateQr.getExtTransactionId(), 20);
+        obj.put("source", generateQr.getSource());
+        obj.put("channel", generateQr.getChannel());
+        obj.put("extTransactionId", generateQr.getType().equalsIgnoreCase("D") ? source + exTxnId : "");
+        obj.put("sid", generateQr.getSid());
+        obj.put("terminalId", generateQr.getTerminalId());
+        obj.put("amount", generateQr.getAmount());
+        obj.put("type", generateQr.getType().toUpperCase());
+        obj.put("remark", generateQr.getRemark());
+        obj.put("requestTime", generateQr.getRequestTime());
+        obj.put("minAmount", generateQr.getMinAmount());
+        obj.put("receipt", generateQr.getReceipt()); // receipt
+        String checksum = generateQrChecksum(obj, generateQr.getChecksum());
+        obj.put("checksum", checksum);
+        return encryptRequest(obj.toString(), generateQr.getEncKey());
     }
 
     private static String generateQrChecksum(JSONObject qrObject, String checkSumKey) {
@@ -62,10 +72,7 @@ public class GenerateQrServiceImpl implements GenerateQrService {
             concatenatedString.append(qrObject.get("remark"));
             concatenatedString.append(qrObject.get("requestTime"));
             concatenatedString.append(qrObject.get("minAmount"));
-            concatenatedString.append(qrObject.get("reciept"));
-            // concatenatedString.append(qrObject.get("param1"));
-            // concatenatedString.append(qrObject.get("param2"));
-            // concatenatedString.append(qrObject.get("param3"));
+            concatenatedString.append(qrObject.get("receipt"));
             System.out.println("String is " + concatenatedString.toString());
         } catch (Exception e) {
             e.printStackTrace();
@@ -75,7 +82,6 @@ public class GenerateQrServiceImpl implements GenerateQrService {
 
     public static String generateChecksumMerchant(String concatenatedString, String checksumkey) {
         String inputString = concatenatedString + checksumkey;
-
         StringBuffer sb = null;
         MessageDigest md;
         try {
@@ -98,7 +104,6 @@ public class GenerateQrServiceImpl implements GenerateQrService {
             Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
             cipher.init(Cipher.ENCRYPT_MODE, setMerchantKey(encryptKey));
             return Base64.getEncoder().encodeToString(cipher.doFinal(strToEncrypt.getBytes("UTF-8")));
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -128,56 +133,9 @@ public class GenerateQrServiceImpl implements GenerateQrService {
             cipher.init(Cipher.DECRYPT_MODE, setMerchantKey(encryptKey));
             return new String(cipher.doFinal(Base64.getDecoder().decode(responseString)), "UTF-8");
         } catch (Exception e) {
-
             e.printStackTrace();
         }
         return null;
-    }
-
-    @Override
-    public String qrGenerate(GenerateQr generateQr) {
-
-        JSONObject obj = getJsonRequest();
-        ENC_KEY = generateQr.getEncKey();
-
-        String source = generateQr.getSource();
-
-        String exTxnId = generateRandomString(generateQr.getExtTransactionId(), 20);
-
-//		GenerateQrEntity dqr = new GenerateQrEntity();
-//		dqr.setAmount(generateQr.getAmount());
-//		dqr.setChannel(generateQr.getChannel());
-//		dqr.setChecksum(generateQr.getChecksum());
-//		dqr.setEncKey(generateQr.getEncKey());
-//		dqr.setExtTransactionId(source + exTxnId);
-//		dqr.setMinAmount(generateQr.getMinAmount());
-//		dqr.setReceipt(generateQr.getReciept());
-//		dqr.setRemark(generateQr.getRemark());
-//		dqr.setRequestTime(generateQr.getRequestTime());
-//		dqr.setSid(generateQr.getSid());
-//		dqr.setSource(generateQr.getSource());
-//		dqr.setTerminalId(generateQr.getTerminalId());
-//		dqr.setType(generateQr.getType());
-//		dqr.setHeaderKey(Constants.cid);
-//		generateQrRepository.save(dqr);
-
-        obj.put("source", generateQr.getSource());
-        obj.put("channel", generateQr.getChannel());
-//		obj.put("extTransactionId", generateQr.getType().equalsIgnoreCase("D") ? source + exTxnId : "");
-        obj.put("extTransactionId", generateQr.getType().equalsIgnoreCase("D") ? source + exTxnId : "");
-        obj.put("sid", generateQr.getSid());
-        obj.put("terminalId", generateQr.getTerminalId());
-        obj.put("amount", generateQr.getAmount());
-        obj.put("type", generateQr.getType().toUpperCase());
-        obj.put("remark", generateQr.getRemark());
-        obj.put("requestTime", generateQr.getRequestTime());
-        obj.put("minAmount", generateQr.getMinAmount());
-        obj.put("reciept", generateQr.getReciept());
-        String checksum = generateQrChecksum(obj, generateQr.getChecksum());
-        obj.put("checksum", checksum);
-        String encryptedReq = encryptRequest(obj.toString(), generateQr.getEncKey());
-
-        return encryptedReq;
     }
 
     @Override

@@ -1,19 +1,17 @@
 package com.npst.evok.api.evok_apis.serviceimpl;
 
+import com.npst.evok.api.evok_apis.pojo.QrReport;
+import com.npst.evok.api.evok_apis.service.QrReportService;
+import org.json.JSONObject;
+import org.springframework.stereotype.Service;
+
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.Base64;
-
-import javax.crypto.Cipher;
-import javax.crypto.spec.SecretKeySpec;
-
-import org.json.JSONObject;
-import org.springframework.stereotype.Service;
-
-import com.npst.evok.api.evok_apis.pojo.QrReport;
-import com.npst.evok.api.evok_apis.service.QrReportService;
 
 @Service
 public class QrReportServiceImpl implements QrReportService {
@@ -39,7 +37,7 @@ public class QrReportServiceImpl implements QrReportService {
             concatenatedString.append(qrObject.get("channel"));
             concatenatedString.append(qrObject.get("terminalId"));
             concatenatedString.append(qrObject.get("startDate"));
-                concatenatedString.append(qrObject.get("endDate"));
+            concatenatedString.append(qrObject.get("endDate"));
             concatenatedString.append(qrObject.get("pageNo"));
             concatenatedString.append(qrObject.get("pageSize"));
 

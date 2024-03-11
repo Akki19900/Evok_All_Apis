@@ -1,0 +1,580 @@
+{
+	"info": {
+		"_postman_id": "01971ca4-53e1-432b-9add-f9478022b92d",
+		"name": "Evok Apis",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25041917"
+	},
+	"item": [
+		{
+			"name": "Verify Vpa Encryption",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "20a0d24e-fb47-47d5-a372-3b2b5e323b4c\n\n",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "user",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"source\": \"BHARTIPAY001\",\n    \"channel\": \"api\",\n    \"extTransactionId\": \"\",\n    \"terminalId\": \"FIRST-2989\",\n    \"sid\": \"FIRST-2989\",\n    \"upiId\": \"kambleab6261@ybl\",\n    \"customerName\": \"Akash\",\n    \"amount\": \"15.00\",\n    \"minAmount\": \"\",\n    \"reciept\": \"\",\n    \"statusKYC\": \"Y\",\n    \"startDate\": \"2023-11-10 00:00:00\",\n    \"endDate\": \"2023-11-17 12:33:00\",\n    \"pageSize\": \"50\",\n    \"pageNo\": \"0\",\n    \"param1\": \"A\",\n    \"param2\": \"B\",\n    \"param3\": \"C\",\n    \"type\": \"d\",\n    \"remark\": null,\n    \"requestTime\": \"\",\n    \"checksum\": \"60944119ddf848ec89d35034e50cd077\",\n    \"encKey\": \"a3347d58e81e4907a87ae03a1f64d97d\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/verifyVpaEnc",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"verifyVpaEnc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Verify Vpa Url",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "cid",
+						"value": "e3fa4f558125a8328ebae2cd77e01710",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "GnnVULYa+JZKLe6GO9yNdPTAjRz8umjsjiR/hAbgZoTI4q+Wqdj450VN6hQpj28xAVqtfe4BnWrNrdZaxVgmyeNXViZ5oUy6iNeHhgZWXjPqRp54fLs/BoTG1ocQNK9FgCfoxNj+8iBO0lQEBp0c5hgh53QBW9kKqahnxQfgkfauizlVbJARv927zqax33vZbBoAaVL/0EXrybCQunUNH2ANiV35GIYTvHkMmyxYud+ctZQAIyMfM+4U1LCt1degxlDY3Nr+5xsiKsAEUFhEqY1cFLXs0n8M7CQo3jlDRR/MyW1DkdCRY7e0LH0F3lbx8fDtStO2dCB6ixk5C0hz9w=="
+				},
+				"url": {
+					"raw": "https://merchantuat.timepayonline.com/evok/cm/v2/verifyVPA",
+					"protocol": "https",
+					"host": [
+						"merchantuat",
+						"timepayonline",
+						"com"
+					],
+					"path": [
+						"evok",
+						"cm",
+						"v2",
+						"verifyVPA"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Decryption For All",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "user",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "20a0d24e-fb47-47d5-a372-3b2b5e323b4c",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"messageDec\": \"XXbvEzNylJPirVxuFeY31uTtdd0Sr+/MgvLND7VCnxPrWrjkgeD2rdHYyw3+vXKfGEs4O7zWBRhMtYp6ZKLz3BKDAWB27NSO4Clt+slnq/4m/hZ0Lk6z/ylZQTkes/ABcS69ptxVp04Ji39suYYw9q+WtwEe9ukobrpFx1gHLzFLU8f08xu6axyrXaCGHPxJCe975fksntbX1QDFqgtbb3nT26u/r2MM1gWxjMjnOYNj4pIFMMAnyWU5YDeOaq1Dwl7ouVQdNLXaOBMDd0LsLoPEQXXT1Hqn/+6AzxA9YbIpe8Fss+Rc8icAXakLx9GJUsFabR8FkhawBg9YlHaB47M9n07PpfQoKwzYIDi9d6T9yhg1KYxf+5RP9YZP/uAiwgo+YKDya37tYWvIUv+MPQN3rIcqy+mrkXkxdysnMYkifgjm1VEXUto3wqgehenQuuUAnNobGqyKIHoluSntpu4asctfbWui9ZouRFtSgu6rDc9MGCU3WnqJd/VOHmg7HH3KopezciXln2Ilwkdc19zjOPTWMsRR1Bz3X/t/5ewECctMVR80D6aAkklSSUn9lCOhb+rA+5iXncIThMukIx67l+IKGJqWnPTnF/LrIONDjTI4P6sTo/rHXDaUfsRHaRK3b37S7IqJDksoXK2CdQpWZzfYcwfKwGrgD74fdD9IKWGFU4i/k7B2UZmCuPPvLRyugfQqeIZcX+ki52A7d2vEAcosB6ZbkoHd4ZPXnqtwWeZp93RBvfDeWaaBhC+T6vxx8qbXlKX5KKRCXrgODFoREzAt2RAlWJeI9Q6uCHKsnyv+DMhDUTiZ+dCbdpAN1YXeMCEJJjfgZ9BVWFRnDIFHbQ6Bun7xdtRUi2XHnZLn5yNjpSZAQR7kR/BqFRV29HkoI80NGoAZcUXQ0UfiKaTCYkilrmOG0NbQZ04KXs6mssRogmUAEKl/672UOeoBCICgfsdzRpJDGq5XLrQ7E4Br3OmyM9iY8LsZy5SJPnj0tQEbLq3DGOQZw8SCPK4Vflk9/JYBW1hIRx2TwoRDevOj+zKcS5zLbdtLd09jnGEFgkz2X+WqKP1wmDjSwxd4eMAA4eJhPQBdkfBZTXY9DmPhN5/yOJpGUxYIHp6YIWaOm8X5OX1EPNVlJuiHF/hBo58UXzkOuVnOg0uolc9IWLt60kmMVrpjckSa6rMTVswwFtB+HdfiiQsKZdlg+KgZ\",\n    \"messageKey\": \"901c2328b17b4ae98bb0f27917610726\"\n                 \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/verifyVpaDec",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"verifyVpaDec"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Merchant Transfers Encryption",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"source\": \"VERVE1741\",\n    \"channel\": \"api\",\n    \"extTransactionId\": \"ASTG\",\n    \"terminalId\": \"VERVE-1741\",\n    \"sid\": \"VERVE-1741\",\n    \"upiId\": \"ghost@cnrb\",\n    \"customerName\": \"flakpay\",\n    \"amount\": \"17.00\",\n    \"minAmount\": \"\",\n    \"reciept\": \"\",\n    \"statusKYC\": \"Y\",\n    \"startDate\": \"2023-11-10 00:00:00\",\n    \"endDate\": \"2023-11-17 12:33:00\",\n    \"pageSize\": \"50\",\n    \"pageNo\": \"0\",\n    \"param1\": \"A\",\n    \"param2\": \"B\",\n    \"param3\": \"C\",\n    \"type\": \"d\",\n    \"remark\": \"\",\n    \"requestTime\": \"\",\n    \"checksum\": \"3740dff76fab0d99c5099a78f083ce3c\",\n    \"encKey\": \"708be7924bc0c089c05625fa4a82d3ff\"\n}\n\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/transferEnc",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"transferEnc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Merchant Transfer Url",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "cid",
+						"value": "dce59b5613904d189e8be0e37f616d4a",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "I3UCgDnj2SNkBWhi8uCGvHmboYwEJYr6fw0o6Gs9hlvwSZpn51KGhzy91bKBjXXwh6OXY\\/1zsbBQFJaelSlt3N7sqRLHJXrSvajQveDiG5cwA4HB1Hr8xQ8Ei9CwqGAmPT20O0PXXW4b1l590kCmR4MWwiy73\\/Y1rqpcaUov5oLSdWWqTbfvrvcJPMOhBhl+bia0DILaPanAZjroc5T4O0rzEsC9i+8EAboju9WPRHRGcNaPZxcIHGlqEbK+KCqTl\\/K9h4DFhRoo8iOgQN5hsH0H2CJwnZiqOne47KdRAh90RPNNSqLiaKUAGSTiIxfFHyOahfnQ8mkLdLzhHa6+HrvDbCvAqr7PUM\\/XdQ+Uwq5f\\/nOkLZJj8ZPrU8HIwfzYfMMtbxRI\\/rXnGjsWRc3B5XPxtStqySN2bKjRt2S1KGk="
+				},
+				"url": {
+					"raw": "https://merchantuat.timepayonline.com/evok/cm/v2/transfer",
+					"protocol": "https",
+					"host": [
+						"merchantuat",
+						"timepayonline",
+						"com"
+					],
+					"path": [
+						"evok",
+						"cm",
+						"v2",
+						"transfer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction Status Encryption",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"source\": \"FLAKP6119\",\n    \"channel\": \"api\",\n    \"extTransactionId\": \"FLAKPAYFRUEEWRXSYSJTCVJPKFKFWYXG\",\n    \"terminalId\": \"FLAKP6119\",\n    \"sid\": \"FLAKP6119\",\n    \"upiId\": \"8180868163@cosb\",\n    \"customerName\": \"Akki\",\n    \"amount\": \"15.00\",\n    \"minAmount\": \"00.00\",\n    \"reciept\": \"\",  \n    \"statusKYC\": \"Y\",\n    \"startDate\": \"2023-11-10 00:00:00\",     \n    \"endDate\": \"2023-11-17 12:33:00\",\n    \"pageSize\": \"50\",\n    \"pageNo\": \"0\",\n    \"param1\": \"A\",\n    \"param2\": \"B\",\n    \"param3\": \"C\",\n    \"type\": \"d\",\n    \"remark\": \"\",\n    \"requestTime\": \"\",\n    \"checksum\": \"4e145861099a449df3cc79eb73c2b90f\",\n    \"encKey\": \"e03095f4076ec077c7949f5deadb6dc7\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/transactionStatusEnc",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"transactionStatusEnc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction Status Url",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "cid",
+						"value": "e76c6205bc4b46a0a4c3301c94587e9a",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "17twuWTNQQ+h5bvnnBLRamShQpzQXrXgX9yTnYuxVpUCiMkrmZe7fZ9WPGD+CjKMTES6tGz/UPd6V9mcUsRkuVhYD7F9mroTGL7tAVIfEG/AqJYF5bAXNhUqGqcllDoGWk+IdmXA26QVGGDWP1D7hPn2jnBWCthtHqcCzUllMzzbG/z4CLG0KOaEP5qJZpp0oOlTjD/k0KGGkxPNMkkJ46JUV7I6uZ8amzjZ4UoSJcN0GEpcSsbV8WcVOjfnMgvxqC5yCg3+9hwYpN/jL4jCrg=="
+				},
+				"url": {
+					"raw": "https://merchantprod.timepayonline.com/evok/qr/v1/qrStatus",
+					"protocol": "https",
+					"host": [
+						"merchantprod",
+						"timepayonline",
+						"com"
+					],
+					"path": [
+						"evok",
+						"qr",
+						"v1",
+						"qrStatus"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction Report Encryption",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"source\": \"CHAND0022\",\n    \"channel\": \"api\",\n    \"extTransactionId\": \"\",\n    \"terminalId\": \"CHAND-0022\",\n    \"sid\": \"CHAND-0022\",\n    \"upiId\": \"8180868163@cosb\",\n    \"customerName\": \"Akki\",\n    \"amount\": \"35.00\",\n    \"minAmount\": \"10.00\",\n    \"receipt\": \"\",\n    \"statusKYC\": \"Y\",\n    \"startDate\": \"2023-11-21 00:00:00\",     \n    \"endDate\": \"2023-11-21 10:33:00\",\n    \"pageSize\": \"10\",\n    \"pageNo\": \"0\",\n    \"param1\": \"A\",\n    \"param2\": \"B\",\n    \"param3\": \"C\",\n    \"type\": \"d\",\n    \"remark\": \"\",\n    \"requestTime\": \"\",\n    \"checksum\": \"7168cd5247c4469c95edb93e45t6h236\",\n    \"encKey\": \"4bfcecba9c3149c092057c50156g8563\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/transactionReportEnc",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"transactionReportEnc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction Report Url",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "cid",
+						"value": "a6c72a6c3c4845c1b9e31231ef0ebf42",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "rdPWTdqNiVCqgLGpd92CyGHlhg/hsJM1vBBsuUkPa8rq6WO4q6Ou7e2YDdvMutf3yuru0uJ9hAtO9jhC9SVRtL/gNbnkwG9MdxCzrUDdmQGr22zSvYvXzXcUra7EFjYvTXh9WwPZk4/EHFhr/mDZqgSnlVBwLOnzDYpz86GDG3SB9LrVjWxZSWGHgTZLxB/9hmsWPT40fm5HV8Mk5Mq58pxgoJQo7DEKu8zE51BMGEg7VmKXPjG4ofBI1je5wXNnoQo4U7y0qMVVzyl5+2BMo1CBCM9qcutUN2rXjlmMOxg="
+				},
+				"url": {
+					"raw": "https://merchantuat.timepayonline.com/evok/cm/v2/report",
+					"protocol": "https",
+					"host": [
+						"merchantuat",
+						"timepayonline",
+						"com"
+					],
+					"path": [
+						"evok",
+						"cm",
+						"v2",
+						"report"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Generate Qr Encryption",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"source\": \"INDI001\",\n    \"channel\": \"api\",\n    \"extTransactionId\": \"\",\n    \"terminalId\": \"INDI001-SEC2PAYINDIA\",\n    \"sid\": \"INDI001-SEC2PAYINDIA\",\n    \"upiId\": \"8180868163@cosb\",\n    \"customerName\": \"Akki\",\n    \"amount\": \"6.00\",\n    \"minAmount\": \"\",\n    \"receipt\": \"\",\n    \"statusKYC\": \"Y\",\n    \"startDate\": \"2023-11-10 00:00:00\",\n    \"endDate\": \"2023-11-17 12:33:00\",\n    \"pageSize\": \"50\",\n    \"pageNo\": \"0\",\n    \"param1\": \"A\",\n    \"param2\": \"B\",\n    \"param3\": \"C\",\n    \"type\": \"s\",\n    \"remark\": \"\",\n    \"requestTime\": \"\",\n    \"checksum\": \"4a2359652e3d4fa39dc01ec4d0617d17\",\n    \"encKey\": \"5a0427173f4d4f3d9fa5dfa6323ff742\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/generateQrEnc",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"generateQrEnc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Generate Qr Url",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "cid",
+						"value": "1b8a2c20dd5144668d31d775325cf021",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "O4r2v+6mgF/hVBHrF1FMU5u04o7NfojRk6vBCWvniCynseDCjgGN/Vk6sgHz/svCsgVgWXnYC3WbG+L+bvb2gw0XyJuQEsZ8kkecDOZtPfkbVeZu81whTRRYkyAvLD8jRmA0aoiqRHb5ApJoZLdTSY7taQe7f2dLgEfB/icu/9EHg0FKtvvtJq5CvrQqW5GoeScKlCaZokcsX8aV+o1X9PfX4fShoQmTtTOKiTSiUc4mRhNwrikO5rXzoaeL3m1dQRO7/tPxw1hjT4bK0ENflwFTYva1QIs91GGMm/KaGFDEwzImsHWc7u8EF29I81fZyvpXAZHaCbTOywiWQFU4hRWV2+DoE7q1ft9+tMtzrSkGXpH/0DUiG4hOQMp5+s7R0qZBwcCGNeCdzPp8qLeQyWs8z/HzmKkJ1je2+CZmkPw="
+				},
+				"url": {
+					"raw": "https://merchantprod.timepayonline.com/evok/qr/v1/dqr",
+					"protocol": "https",
+					"host": [
+						"merchantprod",
+						"timepayonline",
+						"com"
+					],
+					"path": [
+						"evok",
+						"qr",
+						"v1",
+						"dqr"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Qr Report Encryption",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"source\": \"DYNAM2538\",\n    \"channel\": \"api\",\n    \"extTransactionId\": \"\",\n    \"terminalId\": \"DYNAM-2538\",\n    \"sid\": \"DYNAM-2538\",\n    \"upiId\": \"8180868163@kotak\",\n    \"customerName\": \"Akki\",\n    \"amount\": \"25.00\",\n    \"minAmount\": \"8.00\",\n    \"receipt\": \"\",\n    \"statusKYC\": \"Y\",\n    \"startDate\": \"2023-11-15 00:00:00\",     \n    \"endDate\": \"2023-11-15 23:59:59\",\n    \"pageSize\": \"200\",\n    \"pageNo\": \"0\",\n    \"param1\": \"A\",\n    \"param2\": \"B\",\n    \"param3\": \"C\",\n    \"type\": \"D\",\n    \"remark\": \"\",\n    \"requestTime\": \"\",\n    \"checksum\": \"3f34620cb362e48cd283acc8a3be8f9a\",\n    \"encKey\": \"b552241c5f4ec0aa59ef7f614aca88f4\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/qrReportEnc",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"qrReportEnc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Qr Report Url",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "cid",
+						"value": "846fb425fa9f75926efbfdd03f26995e",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "dMIqfIfVgLhs+giJhIbvE4oOvgNVZ+Lm/Vv1wEsrg4qkdUvcH/9qN41AwE+1kKQCcwVz9tc0kQvX06mmJMvHmkv69D17gRWc27UZCDK7Lb43tQ9hycm9zzvFiVvYimDU2mmVdxabi8nQOuj49ygcf5W+OMX2C2TCpbECdvGPae1Y02nRp8ojNYkc+vIeR1z06nMsjySmpwmsEhL7231PJnXkURIKBA50bv53ZrHaKxc6AAPNIKeJPlwOOi5ROP6glE+hhp7MlRZSVfxO0TByEeiZaGZ6RiaFismpp3FeBpuIeJ88pt53NPVwmrWFzGtMuOEhgQnvjwmUwkPxDw9R+pAzoa6WYhes0RfbJS1jjz4="
+				},
+				"url": {
+					"raw": "https://merchantuat.timepayonline.com/evok/qr/v1/qrreport",
+					"protocol": "https",
+					"host": [
+						"merchantuat",
+						"timepayonline",
+						"com"
+					],
+					"path": [
+						"evok",
+						"qr",
+						"v1",
+						"qrreport"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "QR Transaction By RRN Encryption",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"source\": \"DYNAM2538\",\n    \"channel\": \"api\",\n    \"extTransactionId\": \"DYNAMOP170021626864638\",\n    \"terminalId\": \"DYNAM-2538\",\n    \"sid\": \"DYNAM-2538\",\n    \"upiId\": \"8180868163@kotak\",\n    \"customerName\": \"Akki\",\n    \"amount\": \"25.00\",\n    \"minAmount\": \"8.00\",\n    \"receipt\": \"\",\n    \"statusKYC\": \"Y\",\n    \"startDate\": \"2023-11-1 00:00:00\",     \n    \"endDate\": \"2023-11-17 12:42:00\",\n    \"pageSize\": \"10\",\n    \"pageNo\": \"0\",\n    \"param1\": \"A\",\n    \"param2\": \"B\",\n    \"param3\": \"C\",\n    \"type\": \"D\",\n    \"remark\": \"\",\n    \"requestTime\": \"\",\n    \"checksum\": \"3f34620cb362e48cd283acc8a3be8f9a\",\n    \"encKey\": \"b552241c5f4ec0aa59ef7f614aca88f4\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/qrTxnStatusRrnEnc",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"qrTxnStatusRrnEnc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Qr Transaction Rrn Url",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "cid",
+						"value": "dce59b5613904d189e8be0e37f616d4a",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "Z5n30+xF55z1cllLl4MGDu8iJZpSJA5/HkcKoCyG1ceJ7FjY/b+A8IxWXRcX5PuCFgob8w6VpvpHQpAc6SGfDQV67JneR9X8UFay6XiYj+vYNX/miih2PlIGO5kRmQLzI144kv3Xx6Fnf7NsjQmCr26hbX0nR4iWGGeVfyrI6xSGS44yd4u9O16RYRbWxPyaZz9URKCuXCejXiqPMK7KBEOVAs4/76d/lcKWchkaVPqr9ty8JiNiN+hM3AgMS6p0\n"
+				},
+				"url": {
+					"raw": "https://merchantuat.timepayonline.com/evok/qr/v1/qrStatusRRN",
+					"protocol": "https",
+					"host": [
+						"merchantuat",
+						"timepayonline",
+						"com"
+					],
+					"path": [
+						"evok",
+						"qr",
+						"v1",
+						"qrStatusRRN"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Qr Txn Status ExtTransactionId Encryption",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"source\": \"DYNAM2538\",\n    \"channel\": \"api\",\n    \"extTransactionId\": \"DYNAMOP170021626864638\",\n    \"terminalId\": \"DYNAM-2538\",\n    \"sid\": \"DYNAM-2538\",\n    \"upiId\": \"8180868163@kotak\",\n    \"customerName\": \"Akki\",\n    \"amount\": \"25.00\",\n    \"minAmount\": \"8.00\",\n    \"receipt\": \"\",\n    \"statusKYC\": \"Y\",\n    \"startDate\": \"2023-11-1 00:00:00\",     \n    \"endDate\": \"2023-11-17 12:42:00\",\n    \"pageSize\": \"10\",\n    \"pageNo\": \"0\",\n    \"param1\": \"A\",\n    \"param2\": \"B\",\n    \"param3\": \"C\",\n    \"type\": \"D\",\n    \"remark\": \"\",\n    \"requestTime\": \"\",\n    \"checksum\": \"3f34620cb362e48cd283acc8a3be8f9a\",\n    \"encKey\": \"b552241c5f4ec0aa59ef7f614aca88f4\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/qrTxnStatusExtTcnIdEnc",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"qrTxnStatusExtTcnIdEnc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Qr Txn Status ExtTransactionId Encryption Url",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "cid",
+						"value": "e76c6205bc4b46a0a4c3301c94587e9a",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://merchantuat.timepayonline.com/evok/qr/v1/qrStatus",
+					"protocol": "https",
+					"host": [
+						"merchantuat",
+						"timepayonline",
+						"com"
+					],
+					"path": [
+						"evok",
+						"qr",
+						"v1",
+						"qrStatus"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CallBack",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"cipherText\": \"NFO6x4sPwFvR0dObqzWqCYd90nQJ3Uv6yAP4MqGLb\\/9QRn3AowrLjXseJe0AZnh0\\/VGqcJPwyaqXxWKlugZ47VuPA+D8h7QP3YHBNTBHDOEfRbeV2UdaxSBAjAVvQcBmee7\\/8jHrZ++Ab7lIYtoFNOEwp23s1okjhpeZt7AefKrGXpVu\\/v3LBlHl9cZn4hZlntcO2le7aOpoz4DGAanCtrr5n9wyrZDkQ9NAKQdXsb+QmZG4HJ8XQpHhPljqNVMslYfQZbjFyzeRzeG2skYaftC7rjLA5HJ6Kj70dUmk7RZfdda\\/KT35FS3QJIGrf4aLaG8+Y4J975cz9UXVks7Tg8SIg6q9R8QJiTfzETipOlcBe0gSo4fpmaXLz00QvEvCtG+3C8d9n21\\/VzgWK6PZWIQHm43BnpsmPGZL2muCpF7GdA8c+DqpiPeqWuI\\/XO1fDZ4om5QRAGsPQ\\/r7zCaInLYAMh8qgouy+bM+O9SkU+MLDv7gPsw4n2O6Y1tDlKYYwyYP9VsEZTwNqm2HtMCO4g==\",\n    \"encryptionKey\": \"5ac7cf191b8e4513b93eca7ed7be68f7\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/callback",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"callback"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

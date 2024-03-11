@@ -9,7 +9,7 @@ import com.npst.evok.api.evok_apis.pojo.GenerateQr;
 import com.npst.evok.api.evok_apis.repository.GenerateQrRepository;
 import com.npst.evok.api.evok_apis.service.GenerateQrService;
 import com.npst.evok.api.evok_apis.serviceimpl.GenerateQrServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,14 +20,12 @@ import java.net.URLDecoder;
 import java.util.Map;
 
 @RestController
+@AllArgsConstructor
 public class GenerateQrController {
 
-    @Autowired
-    private GenerateQrService generateQrService;
 
-    @Autowired
+    private GenerateQrService generateQrService;
     private OkHttpQR genQR;
-    @Autowired
     private GenerateQrRepository generateQrRepository;
 
     @PostMapping("/generateQrEnc")
@@ -54,7 +52,7 @@ public class GenerateQrController {
             dqr.setEncKey(generateQr.getEncKey());
             dqr.setExtTransactionId(extId);
             dqr.setMinAmount(generateQr.getMinAmount());
-            dqr.setReceipt(generateQr.getReciept());
+            dqr.setReceipt(generateQr.getReceipt());
             dqr.setRemark(generateQr.getRemark());
             dqr.setRequestTime(generateQr.getRequestTime());
             dqr.setSid(generateQr.getSid());
@@ -64,17 +62,11 @@ public class GenerateQrController {
             dqr.setHeaderKey(Constants.cid);
             dqr.setQrString(s);
             generateQrRepository.save(dqr);
-
             String toScreen = "";
-
             if (extId != null && !extId.isEmpty()) {
-
                 toScreen = "QR ===> " + s + "\nextTxn ID ===>  " + extId;
-
             } else {
-
                 toScreen = "QR ===> " + s + "\nextTxn ID ===>  Not Required for Static QR";
-
             }
 
             System.out.println("This is decrypted final response ===== " + decResp);

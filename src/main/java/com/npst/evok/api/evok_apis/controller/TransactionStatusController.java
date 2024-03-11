@@ -58,7 +58,7 @@ public class TransactionStatusController {
                 JSONObject dataObject = dataArray.getJSONObject(i);
 
                 respCode = dataObject.getString("respCode");
-                respMessage = dataObject.getString("respMessge");
+                respMessage = dataObject.getString("respMessage");
 
             }
 

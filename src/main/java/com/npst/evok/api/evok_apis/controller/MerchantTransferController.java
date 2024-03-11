@@ -58,7 +58,7 @@ public class MerchantTransferController {
 
                 txnTime = dataObject.getString("txnTime");
                 respCode = dataObject.getString("respCode");
-                respMessage = dataObject.getString("respMessge");
+                respMessage = dataObject.getString("respMessage");
 
             }
 

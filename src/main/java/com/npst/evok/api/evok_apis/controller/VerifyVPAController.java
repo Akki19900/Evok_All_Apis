@@ -59,7 +59,7 @@ public class VerifyVPAController {
 
                 customerName = dataObject.getString("customerName");
                 respCode = dataObject.getString("respCode");
-                respMessage = dataObject.getString("respMessge");
+                respMessage = dataObject.getString("respMessage");
 
             }
 
@@ -75,7 +75,7 @@ public class VerifyVPAController {
             vpa.setHeaderKey(Constants.cid);
             vpa.setCustomerName(customerName);
             vpa.setRespCode(respCode);
-            vpa.setRespMessge(respMessage);
+            vpa.setRespMessage(respMessage);
             verifyVpaRepository.save(vpa);
 
             return new ResponseEntity<>(decresp, HttpStatus.OK);

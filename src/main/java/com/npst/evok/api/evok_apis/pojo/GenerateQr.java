@@ -24,7 +24,7 @@ public class GenerateQr {
     private String remark;
     private String requestTime;
     private String minAmount;
-    private String reciept;
+    private String receipt;
     private String checksum;
     private String encKey;
     private String messageDec;
