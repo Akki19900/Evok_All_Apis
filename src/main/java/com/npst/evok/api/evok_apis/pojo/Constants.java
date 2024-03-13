@@ -2,12 +2,12 @@ package com.npst.evok.api.evok_apis.pojo;
 
 public interface Constants {
 
-    final String cid = "94b9cd89190d476f9b480d7c2a660de5";
+    final String cid = "6a6bb7f094e0f84f81ed2b6437c2adb8";
     final String verifyVPA = "https://merchantuat.timepayonline.com/evok/cm/v2/verifyVPA";
     final String transfer = "https://merchantuat.timepayonline.com/evok/cm/v2/transfer";
     final String txnStatus = "https://merchantuat.timepayonline.com/evok/qr/v1/qrStatus";
     final String txnReport = "https://merchantuat.timepayonline.com/evok/cm/v2/report";
-    final String qr = "https://merchantprod.timepayonline.com/evok/qr/v1/dqr";
+    final String qr = "https://merchantuat.timepayonline.com/evok/qr/v1/dqr";
     final String qrRRN = "https://merchantuat.timepayonline.com/evok/qr/v1/qrStatusRRN";
     final String qrReport = "https://merchantuat.timepayonline.com/evok/qr/v1/qrreport";
     final String qrStatus = "https://merchantuat.timepayonline.com/evok/qr/v1/qrStatus";

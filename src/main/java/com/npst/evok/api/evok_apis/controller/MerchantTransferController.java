@@ -1,16 +1,5 @@
 package com.npst.evok.api.evok_apis.controller;
 
-import java.util.Map;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.npst.evok.api.evok_apis.entity.Collect;
@@ -19,18 +8,26 @@ import com.npst.evok.api.evok_apis.pojo.Constants;
 import com.npst.evok.api.evok_apis.pojo.MerchantTransfer;
 import com.npst.evok.api.evok_apis.repository.CollectRepository;
 import com.npst.evok.api.evok_apis.service.MerchantTransferService;
-import com.npst.evok.api.evok_apis.serviceimpl.GenerateQrServiceImpl;
 import com.npst.evok.api.evok_apis.serviceimpl.MerchantTransferImpl;
+import lombok.AllArgsConstructor;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Map;
 
 @RestController
+@AllArgsConstructor
 public class MerchantTransferController {
 
-    @Autowired
-    CollectRepository collectRepository;
-    @Autowired
+
     private MerchantTransferService merchantTransferService;
-    @Autowired
     private OkHttpTransfer okHttpTransfer;
+    CollectRepository collectRepository;
 
     @PostMapping("/transferEnc")
     public ResponseEntity<Object> transferMerchant(@RequestBody MerchantTransfer merchantTransfer) {
@@ -58,7 +55,7 @@ public class MerchantTransferController {
 
                 txnTime = dataObject.getString("txnTime");
                 respCode = dataObject.getString("respCode");
-                respMessage = dataObject.getString("respMessage");
+                respMessage = dataObject.getString("respMessge");
 
             }
 
@@ -76,7 +73,7 @@ public class MerchantTransferController {
             collect.setHeaderKey(Constants.cid);
             collect.setEncKey(merchantTransfer.getEncKey());
             collect.setRespCode(respCode);
-            collect.setRespMessge(respMessage);
+            collect.setRespMessage(respMessage);
             collect.setTxnTime(txnTime);
             collectRepository.save(collect);
 

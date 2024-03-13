@@ -31,7 +31,7 @@ public class Collect {
     private String headerKey;
     private Date date = new Date();
     private String respCode;
-    private String respMessge;
+    private String respMessage;
     private String txnTime;
 
 }

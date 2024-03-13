@@ -1,16 +1,5 @@
 package com.npst.evok.api.evok_apis.controller;
 
-import java.util.Map;
-import java.util.concurrent.TimeoutException;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.npst.evok.api.evok_apis.entity.VerifyVpaEntity;
@@ -21,6 +10,17 @@ import com.npst.evok.api.evok_apis.repository.VerifyVpaRepository;
 import com.npst.evok.api.evok_apis.service.VerifyVPAService;
 import com.npst.evok.api.evok_apis.serviceimpl.GenerateQrServiceImpl;
 import com.npst.evok.api.evok_apis.serviceimpl.VerifyVpaServiceImpl;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Map;
+import java.util.concurrent.TimeoutException;
 
 @RestController
 public class VerifyVPAController {
@@ -48,18 +48,22 @@ public class VerifyVPAController {
             ObjectMapper objectMapper = new ObjectMapper();
             Map<String, Object> dataMap = objectMapper.readValue(decResp, new TypeReference<Map<String, Object>>() {
             });
+
             String extId = (String) dataMap.get("extTransactionId");
+
             JSONObject jsonObject = new JSONObject(decResp);
             JSONArray dataArray = jsonObject.getJSONArray("data");
+
             String customerName = "";
             String respCode = "";
             String respMessage = "";
+
             for (int i = 0; i < dataArray.length(); i++) {
                 JSONObject dataObject = dataArray.getJSONObject(i);
 
                 customerName = dataObject.getString("customerName");
                 respCode = dataObject.getString("respCode");
-                respMessage = dataObject.getString("respMessage");
+                respMessage = dataObject.getString("respMessge");
 
             }
 
